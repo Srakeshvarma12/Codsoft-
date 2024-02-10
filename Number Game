@@ -1,138 +1,35 @@
-// Java program for the above approach
-
 import java.util.Scanner;
- 
+import java.util.Random;
 
-public class GFG {
- 
+public class NumberGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
-    // Function that implements the
+        int lowerBound = 1;
+        int upperBound = 100;
+        int secretNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+        int attempts = 0;
+        boolean hasGuessedCorrectly = false;
 
-    // number guessing game
+        System.out.println("Welcome to the Number Guessing Game!");
+        System.out.println("I have selected a number between " + lowerBound + " and " + upperBound + ". Can you guess it?");
 
-    public static void
+        while (!hasGuessedCorrectly) {
+            System.out.print("Enter your guess: ");
+            int guess = scanner.nextInt();
+            attempts++;
 
-    guessingNumberGame()
-
-    {
-
-        // Scanner Class
-
-        Scanner sc = new Scanner(System.in);
- 
-
-        // Generate the numbers
-
-        int number = 1 + (int)(100
-
-                               * Math.random());
- 
-
-        // Given K trials
-
-        int K = 5;
- 
-
-        int i, guess;
- 
-
-        System.out.println(
-
-            "A number is chosen"
-
-            + " between 1 to 100."
-
-            + "Guess the number"
-
-            + " within 5 trials.");
- 
-
-        // Iterate over K Trials
-
-        for (i = 0; i < K; i++) {
- 
-
-            System.out.println(
-
-                "Guess the number:");
- 
-
-            // Take input for guessing
-
-            guess = sc.nextInt();
- 
-
-            // If the number is guessed
-
-            if (number == guess) {
-
-                System.out.println(
-
-                    "Congratulations!"
-
-                    + " You guessed the number.");
-
-                break;
-
+            if (guess == secretNumber) {
+                hasGuessedCorrectly = true;
+                System.out.println("Congratulations! You've guessed the correct number " + secretNumber + " in " + attempts + " attempts.");
+            } else if (guess < secretNumber) {
+                System.out.println("Try a higher number.");
+            } else {
+                System.out.println("Try a lower number.");
             }
-
-            else if (number > guess
-
-                     && i != K - 1) {
-
-                System.out.println(
-
-                    "The number is "
-
-                    + "greater than " + guess);
-
-            }
-
-            else if (number < guess
-
-                     && i != K - 1) {
-
-                System.out.println(
-
-                    "The number is"
-
-                    + " less than " + guess);
-
-            }
-
-        }
- 
-
-        if (i == K) {
-
-            System.out.println(
-
-                "You have exhausted"
-
-                + " K trials.");
- 
-
-            System.out.println(
-
-                "The number was " + number);
-
         }
 
-    }
- 
-
-    // Driver Code
-
-    public static void
-
-    main(String arg[])
-
-    {
- 
-
-        // Function Call
-
-        guessingNumberGame();
-
+        scanner.close();
     }
 }
